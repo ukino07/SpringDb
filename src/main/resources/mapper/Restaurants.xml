@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.research.lunchSelector.model.RestaurantsMapper">
+
+    <!-- 전체 목록 조회 -->
+    <select id="getAllRestaurants" resultType="com.research.lunchSelector.model.Restaurant">
+        SELECT
+        id as id,
+        restaurant_name as name,
+        open_time as openAt,
+        close_time as closeAt
+        FROM restaurants
+        ORDER BY id
+    </select>
+
+    <!-- 개별 조회 -->
+    <select id="getRestaurant" resultType="com.research.lunchSelector.model.Restaurant">
+        SELECT
+        id as id,
+        restaurant_name as name,
+        open_time as openAt,
+        close_time as closeAt
+        FROM restaurants
+        WHERE id = #{id}
+    </select>
+
+    <!-- 개별 등록 -->
+    <insert id="addRestaurant" parameterType="com.research.lunchSelector.model.Restaurant">
+        INSERT INTO restaurants (id, restaurant_name, open_time, close_time) VALUES (#{id}, #{name}, #{openAt}, #{closeAt})
+    </insert>
+
+    <!-- 개별 수정 -->
+    <update id="updateRestaurant" parameterType="com.research.lunchSelector.model.Restaurant">
+        UPDATE restaurants SET restaurant_name = #{name}, open_time=#{openAt}, close_time = closeAt WHERE id = #{id}
+    </update>
+
+    <!-- 개별 삭제 -->
+    <delete id="deleteRestaurant">
+        DELETE FROM restaurants WHERE id = #{id}
+    </delete>
+
+</mapper>
